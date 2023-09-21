@@ -16,4 +16,8 @@ public class DonationService {
     public Integer getSumOfQuantity() {
         return donationRepository.sumOfQuantity();
     }
+
+    public Integer getSumOfDonations() {
+        return donationRepository.sumOfDonations();
+    }
 }

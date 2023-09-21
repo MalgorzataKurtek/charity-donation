@@ -28,9 +28,11 @@ public class HomeController {
     public String homeAction(Model model) {
         List<Institution> institutions = institutionRepository.findAll();
         Integer sumOfQuantity = donationService.getSumOfQuantity();
+        Integer sumOfDonations = donationService.getSumOfDonations();
 
         model.addAttribute("institutions",institutions);
         model.addAttribute("sumOfQuantity", sumOfQuantity);
+        model.addAttribute("sumOfDonations", sumOfDonations);
         return "index";
     }
 
