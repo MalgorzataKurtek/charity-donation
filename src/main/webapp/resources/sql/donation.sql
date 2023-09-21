@@ -1,0 +1,2 @@
+INSERT INTO `charity-donation`.donation (id, city, pick_up_comment, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id) VALUES (1, 'Kielce', 'Proszę zadzwonić przed przyjazdem', '2023-09-22', '15:00:00', 5, 'Grochowa', '25-606', 3);
+INSERT INTO `charity-donation`.donation (id, city, pick_up_comment, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id) VALUES (2, 'Kraków', 'Proszę zadzwonić przed przyjazdem', '2023-09-22', '18:00:00', 2, 'Strzelców', '31-422', 6);

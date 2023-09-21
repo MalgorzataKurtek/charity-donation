@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.model.Institution;
+import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.service.DonationService;
 
 import java.util.List;
 
@@ -14,21 +16,22 @@ import java.util.List;
 public class HomeController {
 
     private final InstitutionRepository institutionRepository;
+    private final DonationService donationService;
 
-    public HomeController(InstitutionRepository institutionRepository) {
+    public HomeController(InstitutionRepository institutionRepository, DonationService donationService) {
         this.institutionRepository = institutionRepository;
+        this.donationService = donationService;
     }
 
-
-    @RequestMapping("/")
-    public String homeAction(Model model) {
-        return "index";
-    }
 
     @GetMapping("/")
-    public String showInstitutions(Model model) {
+    public String homeAction(Model model) {
         List<Institution> institutions = institutionRepository.findAll();
+        Integer sumOfQuantity = donationService.getSumOfQuantity();
+
         model.addAttribute("institutions",institutions);
+        model.addAttribute("sumOfQuantity", sumOfQuantity);
         return "index";
     }
+
 }
