@@ -1,5 +1,6 @@
 package pl.coderslab.charity;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeAction(Model model) {
-        List<Institution> institutions = institutionRepository.findAll();
+        List<Institution> institutions = institutionRepository.findAll(Pageable.ofSize(4)).toList();
         Integer sumOfQuantity = donationService.getSumOfQuantity();
-        Integer sumOfDonations = donationService.getSumOfDonations();
+        long sumOfDonations = donationService.getSumOfDonations();
 
         model.addAttribute("institutions",institutions);
         model.addAttribute("sumOfQuantity", sumOfQuantity);

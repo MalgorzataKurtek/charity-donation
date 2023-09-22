@@ -14,10 +14,10 @@ public class DonationService {
     }
 
     public Integer getSumOfQuantity() {
-        return donationRepository.sumOfQuantity();
+        return donationRepository.sumOfQuantity().orElse(0);
     }
 
-    public Integer getSumOfDonations() {
-        return donationRepository.sumOfDonations();
+    public long getSumOfDonations() {
+        return donationRepository.count();
     }
 }

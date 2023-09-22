@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import pl.coderslab.charity.model.Donation;
 
+import java.util.Optional;
+
 public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     @Query("SELECT SUM(d.quantity) FROM Donation d")
-    Integer sumOfQuantity();
+    Optional<Integer> sumOfQuantity();
 
-    @Query("SELECT COUNT(d) FROM Donation d")
-    Integer sumOfDonations();
 }
