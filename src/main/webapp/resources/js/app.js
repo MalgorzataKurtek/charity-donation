@@ -164,6 +164,46 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      function showInput() {
+
+        // Pobranie nazwy wybranych kategorii
+        let table = [];
+        $('.category').each(function () {
+          table.push($(this).val());
+        });
+
+        let text2 = " ";
+        $('.myCheckbox:checked').each(function () {
+          // text2 += ($(this).val())+" ";
+          text2 += table[$(this).val()-1] + " ";
+        });
+        // Pobranie nazwy wybranej instytucji
+        let table2 = [];
+        $('.institution').each(function () {
+          table2.push($(this).val());
+        });
+        let institutionName = table2[$('.myRadio:checked').val()];
+
+
+
+        $('#categoryDisplay').text(text2);
+        let bags = $('#bagId').val();
+        $('#bagDisplay').text('Liczba worków: '+bags+ ' Kategorie: ');
+        $('#institutionDisplay').text(institutionName);
+
+        let city = $('input[name=city', '#donationForm').val();
+        let street = $('input[name=street', '#donationForm').val();
+        let zipCode = $('input[name=zipCode', '#donationForm').val();
+        let address = $('#addressDisplay');
+        address.append("<li>" + street + "</li>").append("<li>" + zipCode + "</li>").append("<li>" + city + "</li>");
+
+        let details = $('#detailsDisplay');
+        let date = $('input[name=pickUpDate', '#donationForm').val();
+        let time = $('input[name=pickUpTime', '#donationForm').val();
+        let comment = $('textarea[name=pickUpComment', '#donationForm').val();
+        details.append("<li>" + date + "</li>").append("<li>" + time + "</li>").append("<li>" + comment + "</li>");
+
+      }
     }
 
   }
