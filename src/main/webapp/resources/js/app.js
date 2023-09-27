@@ -96,15 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
      * Switching between form steps
      */
     function updateSummary() {
-        // Pobieramy dane z formularza
+        let numberOfBags = document.querySelector('input[name="quantity"]').value;
+
         let selectedCategories = [];
         let checkboxes = document.querySelectorAll('input[name="categories"]:checked');
         for (let i = 0; i < checkboxes.length; i++) {
-            selectedCategories.push(checkboxes[i].nextElementSibling.innerText);
+            selectedCategories.push(checkboxes[i].parentElement.querySelector('.description').innerText);
         }
 
-        let numberOfBags = document.querySelector('input[name="quantity"]').value;
-        let selectedInstitution = document.querySelector('input[name="institution"]:checked').nextElementSibling.nextElementSibling.querySelector('.title').textContent;
+
+        let selectedInstitution = document.querySelector('input[name="institution"]:checked').parentElement.querySelector('.title').innerText;
         let street = document.querySelector('input[name="street"]').value;
         let city = document.querySelector('input[name="city"]').value;
         let zipCode = document.querySelector('input[name="zipCode"]').value;
@@ -113,7 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let pickUpTime = document.querySelector('input[name="pickUpTime"]').value;
         let courierNote = document.querySelector('textarea[name="pickUpComment"]').value || 'No comments';
 
-        // Uzupełniamy podsumowanie
+
+        document.querySelector('#bagsQuantitySummary').textContent = numberOfBags + " worków";
         document.querySelector('#selectedCategoriesSummary').textContent = selectedCategories.join(', ');
         document.querySelector('#institutions').textContent = selectedInstitution;
         document.querySelector('#streetSummary').textContent = street;
@@ -122,10 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector('#phoneSummary').textContent = phone;
         document.querySelector('#dateSummary').textContent = pickUpDate;
         document.querySelector('#timeSummary').textContent = pickUpTime;
-        document.querySelector('#commentSummary').textContent = courierNote || 'No comments';
+        document.querySelector('#commentSummary').textContent = courierNote;
 
-        // Ustawiamy liczbę worków na odpowiednim elemencie
-        document.querySelector('#bagsQuantitySummary').textContent = numberOfBags + " bags";
     }
 
     class FormSteps {

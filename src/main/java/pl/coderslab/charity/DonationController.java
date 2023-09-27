@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.charity.model.Category;
 import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.model.Institution;
 import pl.coderslab.charity.service.CategoryService;
+import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
 
 import java.util.List;
@@ -17,10 +19,12 @@ public class DonationController {
 
     private CategoryService categoryService;
     private InstitutionService institutionService;
+    private DonationService donationService;
 
-    public DonationController(CategoryService categoryService, InstitutionService institutionService) {
+    public DonationController(CategoryService categoryService, InstitutionService institutionService, DonationService donationService) {
         this.categoryService = categoryService;
         this.institutionService = institutionService;
+        this.donationService = donationService;
     }
 
     @ModelAttribute("categories")
@@ -37,6 +41,13 @@ public class DonationController {
     public String addDonation(Model model) {
         model.addAttribute("donation", new Donation());
         return "form";
+    }
+
+    @PostMapping("/addDonation")
+    public String processDonation(@ModelAttribute("donation") Donation donation) {
+        //walidacja
+        donationService.saveDonation(donation);
+        return "form-confirmation";
     }
 
 }
