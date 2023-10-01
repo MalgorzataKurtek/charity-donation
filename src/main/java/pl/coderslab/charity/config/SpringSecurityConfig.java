@@ -33,7 +33,8 @@ public class SpringSecurityConfig {
                             .antMatchers("/register/**").permitAll()
                             .antMatchers("/").permitAll()
                             .antMatchers("/css/**", "/fonts/**", "/js/**", "/images/**").permitAll()
-                            .antMatchers("/users").hasRole("ADMIN");
+                            .antMatchers("/users").hasRole("ADMIN")
+                            .antMatchers("/addDonation").authenticated();
                 })
                 .formLogin(
                         form -> form
