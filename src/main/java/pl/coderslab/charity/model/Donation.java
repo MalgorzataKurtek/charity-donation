@@ -5,9 +5,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -33,18 +31,19 @@ public class Donation {
     @NotNull(message = "Musisz wybrać instytucję")
     @ManyToOne
     private Institution institution;
-    @NotNull(message = "Ulica nie może być pusta")
+    @NotBlank(message = "Ulica nie może być pusta")
     private String street;
-    @NotNull(message = "Miasto nie może być puste")
+    @NotBlank(message = "Miasto nie może być puste")
     private String city;
-    @NotNull(message = "Kod pocztowy nie może byc pusty")
+    @NotBlank(message = "Kod pocztowy nie może byc pusty")
     private String zipCode;
     @NotNull(message = "Musisz wybrać datę odbioru")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future
     private LocalDate pickUpDate;
     @NotNull(message = "Musisz wybrać godzinę odbioru")
     private LocalTime pickUpTime;
     private String pickUpComment;
-    @NotNull(message = "Numer telefonu nie może być pusty")
+    @NotBlank(message = "Numer telefonu nie może być pusty")
     private String phone;
 }

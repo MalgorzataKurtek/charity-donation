@@ -28,19 +28,20 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests(authorize -> {
+                .authorizeRequests((authorize) ->
                     authorize
                             .antMatchers("/register/**").permitAll()
                             .antMatchers("/").permitAll()
                             .antMatchers("/css/**", "/fonts/**", "/js/**", "/images/**").permitAll()
                             .antMatchers("/users").hasRole("ADMIN")
-                            .antMatchers("/addDonation").authenticated();
-                })
-                .formLogin(
+                            .antMatchers("/addDonation").authenticated()
+
+                ).formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/userProfile", true)
+                                .usernameParameter("email")
+//                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/addDonation", true)
                                 .permitAll()
                 )
                 .logout(

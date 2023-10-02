@@ -16,6 +16,7 @@ import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -43,34 +44,6 @@ public class HomeController {
         model.addAttribute("sumOfQuantity", sumOfQuantity);
         model.addAttribute("sumOfDonations", sumOfDonations);
         return "index";
-    }
-
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "register";
-    }
-
-
-    @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") User user,
-                               BindingResult result,
-                               Model model) {
-        User existingUser = userService.findUserByEmail(user.getEmail());
-
-        if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
-            result.rejectValue("email", null,
-                    "An account with this email address already exists.");
-        }
-
-        if (result.hasErrors()) {
-            model.addAttribute("user", user);
-            return "/register";
-        }
-
-        userService.saveUser(user);
-        return "redirect:/register?success";
     }
 
 }

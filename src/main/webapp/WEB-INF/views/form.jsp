@@ -212,6 +212,7 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text" id="bagsQuantitySummary"></span>
+                                &nbsp;
                                 <span class="summary--text" id="selectedCategoriesSummary"></span>
                             </li>
                             <li>

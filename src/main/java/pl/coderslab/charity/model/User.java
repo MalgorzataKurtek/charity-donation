@@ -7,7 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Getter
@@ -20,10 +21,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Email should not be empty")
+    @NotBlank(message = "Email should not be empty")
     @Email
     private String email;
-    @NotEmpty(message = "Password should not be empty")
+    @NotBlank(message = "Password should not be empty")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
